@@ -2,7 +2,8 @@ export interface User {
   idx: string;
   name: string;
   roomName: string;
-  lastKnownPosition?: { x: number; y: number };
+  lastKnownPosition: { x: number; y: number };
+  message: string;
 }
 
 export class UsersHandler {

@@ -1,14 +1,14 @@
 import React, { FC, ReactElement, useEffect, useState } from "react";
 import Draggable from "react-draggable";
+import {
+  getClosestVisibleElementsSortedByDistance,
+  noop,
+} from "../../helpers/helpers";
 import { User } from "../chat-room/ChatRoom";
 
 interface UserDraggableProps {
   users: User[];
   handleStop: (e: MouseEvent, data: Object) => void;
-}
-
-function noop() {
-  return;
 }
 
 const UserDraggable: FC<UserDraggableProps> = ({
@@ -21,7 +21,12 @@ const UserDraggable: FC<UserDraggableProps> = ({
     const urlParams = new URLSearchParams(window.location.search);
 
     setActualName(urlParams.get("name").trim().toLowerCase());
-  }, []);
+
+    //missing visibility css implementation
+    /* console.log(
+      getClosestVisibleElementsSortedByDistance(actualName.replace(/\s/g, ""))
+    ); */
+  }, [users]);
 
   return (
     <div>
@@ -40,7 +45,10 @@ const UserDraggable: FC<UserDraggableProps> = ({
             onStop={handleStop}
             onStart={actualName === user.name ? noop : () => false}
           >
-            <div className="handle" id="special-selector">
+            <div
+              className="handle"
+              id={`selector-dragabble-${user.name.replace(/\s/g, "")}`}
+            >
               {user?.name}
             </div>
           </Draggable>
@@ -50,4 +58,4 @@ const UserDraggable: FC<UserDraggableProps> = ({
   );
 };
 
-export default UserDraggable;
+export default React.memo(UserDraggable);

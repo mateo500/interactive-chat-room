@@ -7,7 +7,7 @@ export const joinRoomHandler = (socket: Socket) => {
   socket.on(
     "join-room",
     (
-      { name, roomName, lastKnownPosition },
+      { name, roomName, lastKnownPosition, message },
       callback: (users?: User[], error?: string) => void
     ) => {
       const { error, user } = userHandler.addUser({
@@ -15,6 +15,7 @@ export const joinRoomHandler = (socket: Socket) => {
         name,
         roomName,
         lastKnownPosition,
+        message,
       });
 
       if (error) return callback(undefined, error);

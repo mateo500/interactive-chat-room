@@ -1,21 +1,19 @@
 import { FC, ReactElement, useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io/dist/typed-events";
+import { getRandomInt } from "../../helpers/helpers";
 import UserDraggable from "../user-draggable/UserDraggable";
+import envs from "../../env/environment";
 
 export interface User {
   idx: string;
   name: string;
   roomName: string;
-  lastKnownPosition?: { x: number; y: number };
+  lastKnownPosition: { x: number; y: number };
+  message: string;
 }
 
-function getRandomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-
-const ENDPOINT = "https://interactive-chatroom.herokuapp.com";
-const socket: Socket<DefaultEventsMap, DefaultEventsMap> = io(ENDPOINT, {
+const socket: Socket<DefaultEventsMap, DefaultEventsMap> = io(envs.WS_HOST, {
   upgrade: false,
   transports: ["websocket"],
 });
@@ -29,15 +27,6 @@ const ChatRoom: FC = (): ReactElement<HTMLDivElement> => {
   ) => {
     socket.emit("change-user-position", { x: data.lastX, y: data.lastY });
   };
-
-  /* const getElements = () => {
-    const mydiv = document.querySelector("#special-selector");
-    console.log(mydiv);
-  };
-
-  useEffect(() => {
-    getElements();
-  }, []); */
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -53,7 +42,7 @@ const ChatRoom: FC = (): ReactElement<HTMLDivElement> => {
 
       socket.emit(
         "join-room",
-        { name, roomName, lastKnownPosition },
+        { name, roomName, lastKnownPosition, message: "test" },
         (users?: User[], error?: string) => {
           if (error) console.log(error);
 
