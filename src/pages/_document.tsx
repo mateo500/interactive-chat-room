@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 import Document, { Head, Main, NextScript, Html } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 

@@ -13,7 +13,7 @@ export interface User {
   message: string;
 }
 
-const socket: Socket<DefaultEventsMap, DefaultEventsMap> = io(envs.WS_HOST, {
+const socket: typeof Socket = io(envs.WS_HOST, {
   upgrade: false,
   transports: ["websocket"],
 });
@@ -56,7 +56,7 @@ const ChatRoom: FC = (): ReactElement<HTMLDivElement> => {
     });
 
     return () => {
-      socket.off();
+      socket.off("users-update");
     };
   }, []);
 

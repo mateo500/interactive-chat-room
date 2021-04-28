@@ -54,8 +54,8 @@ export class UsersHandler {
       ...this.users[userIndex],
       lastKnownPosition: {
         ...this.users[userIndex].lastKnownPosition,
-        x: x,
-        y: y,
+        x,
+        y,
       },
     };
 

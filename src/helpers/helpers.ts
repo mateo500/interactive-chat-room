@@ -1,11 +1,14 @@
-export function noop() {
+/* eslint-disable @typescript-eslint/no-array-constructor */
+/* eslint-disable no-useless-return */
+/* eslint-disable no-restricted-properties*/
+export function noop(): void {
   return;
 }
 
 export function distanceBetweenElements(
   elementOne: HTMLElement,
   elementTwo: HTMLElement
-) {
+): number {
   const element1 = elementOne.getBoundingClientRect();
   const element2 = elementTwo.getBoundingClientRect();
 
@@ -15,11 +18,16 @@ export function distanceBetweenElements(
   return Math.sqrt(distanceSquared);
 }
 
-export function getRandomInt(min: number, max: number) {
+export function getRandomInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-export const getClosestVisibleElementsSortedByDistance = (userName: string) => {
+export const getClosestVisibleElementsSortedByDistance = (
+  userName: string
+): {
+  elementId: string;
+  distance: number;
+}[] => {
   const selfElement = document.querySelector(`#selector-dragabble-${userName}`);
 
   if (!selfElement) return [];
@@ -54,3 +62,6 @@ export const getClosestVisibleElementsSortedByDistance = (userName: string) => {
 
   return elementsWithDistance;
 };
+
+export const cleanWhiteSpacesInString = (str: string): string =>
+  str.replace(/\s/g, "");

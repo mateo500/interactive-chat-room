@@ -6,8 +6,10 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "airbnb",
-    "prettier"
+    "prettier",
+    "plugin:@typescript-eslint/recommended"
   ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -15,7 +17,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier", "import"],
+  "plugins": ["react", "prettier", "import", "@typescript-eslint"],
   "rules": {
     "import/prefer-default-export": "off",
     "spaced-comment": "off",
@@ -25,6 +27,12 @@
     "react/no-array-index-key": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-filename-extension": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "no-param-reassign": "warn",
+    "consistent-return": "off"
   }
 }

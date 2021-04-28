@@ -1,5 +1,6 @@
+import { ReactElement } from "react";
 import LoginForm from "../components/login-form/LoginForm";
 
-export default function Index() {
+export default function Index(): ReactElement {
   return <LoginForm />;
 }

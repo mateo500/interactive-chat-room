@@ -9,7 +9,7 @@ import {
   sendMessageHandler,
 } from "./socket.handlers";
 
-const port: number = parseInt(process.env.PORT || "5000");
+const port: number = parseInt(process.env.PORT || "5000", 10);
 const dev: boolean = process.env.NODE_ENV !== "production";
 const nextApp = next({ dev });
 const nextHandler: NextApiHandler = nextApp.getRequestHandler();
@@ -29,12 +29,12 @@ const nextHandler: NextApiHandler = nextApp.getRequestHandler();
       changeUserPositionHandler(socket, io);
     });
 
-    app.all("*", (req: Request, res: Response) => {
-      return nextHandler(
+    app.all("*", (req: Request, res: Response) =>
+      nextHandler(
         (req as unknown) as NextApiRequest,
         (res as unknown) as NextApiResponse
-      );
-    });
+      )
+    );
 
     serverHttp.listen(port, (err?: any) => {
       if (err) throw err;

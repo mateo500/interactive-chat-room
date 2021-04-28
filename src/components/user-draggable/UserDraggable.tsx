@@ -1,6 +1,7 @@
-import React, { FC, ReactElement, useEffect, useState } from "react";
+import { FC, ReactElement, useEffect, useState, memo } from "react";
 import Draggable from "react-draggable";
 import {
+  cleanWhiteSpacesInString,
   getClosestVisibleElementsSortedByDistance,
   noop,
 } from "../../helpers/helpers";
@@ -8,7 +9,7 @@ import { User } from "../chat-room/ChatRoom";
 
 interface UserDraggableProps {
   users: User[];
-  handleStop: (e: MouseEvent, data: Object) => void;
+  handleStop: (e: MouseEvent, data: { lastX: number; lastY: number }) => void;
 }
 
 const UserDraggable: FC<UserDraggableProps> = ({
@@ -24,38 +25,36 @@ const UserDraggable: FC<UserDraggableProps> = ({
 
     //missing visibility css implementation
     /* console.log(
-      getClosestVisibleElementsSortedByDistance(actualName.replace(/\s/g, ""))
+      getClosestVisibleElementsSortedByDistance(cleanWhiteSpacesInString(actualName))
     ); */
   }, [users]);
 
   return (
     <div>
-      {users.map((user, index) => {
-        return (
-          <Draggable
-            axis="both"
-            handle=".handle"
-            position={{
-              x: user.lastKnownPosition.x,
-              y: user.lastKnownPosition.y,
-            }}
-            grid={[10, 10]}
-            scale={1}
-            key={`${index || 0}-user-dragable`}
-            onStop={handleStop}
-            onStart={actualName === user.name ? noop : () => false}
+      {users.map((user, index) => (
+        <Draggable
+          axis="both"
+          handle=".handle"
+          position={{
+            x: user.lastKnownPosition.x,
+            y: user.lastKnownPosition.y,
+          }}
+          grid={[10, 10]}
+          scale={1}
+          key={`${index || 0}-user-dragable`}
+          onStop={handleStop}
+          onStart={actualName === user.name ? noop : () => false}
+        >
+          <div
+            className="handle"
+            id={`selector-dragabble-${cleanWhiteSpacesInString(user.name)}`}
           >
-            <div
-              className="handle"
-              id={`selector-dragabble-${user.name.replace(/\s/g, "")}`}
-            >
-              {user?.name}
-            </div>
-          </Draggable>
-        );
-      })}
+            {user?.name}
+          </div>
+        </Draggable>
+      ))}
     </div>
   );
 };
 
-export default React.memo(UserDraggable);
+export default memo(UserDraggable);

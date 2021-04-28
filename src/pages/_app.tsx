@@ -1,6 +1,7 @@
+import { ReactElement } from "react";
 import "../style.css";
 
-function App({ Component, pageProps }) {
+function App({ Component, pageProps }): ReactElement {
   return <Component {...pageProps} />;
 }
 
