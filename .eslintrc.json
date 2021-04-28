@@ -1,0 +1,29 @@
+{
+  "env": {
+    "browser": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier", "import"],
+  "rules": {
+    "import/prefer-default-export": "off",
+    "spaced-comment": "off",
+    "camelcase": "off",
+    "no-nested-ternary": "off",
+    "react/prop-types": "off",
+    "react/no-array-index-key": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-filename-extension": "off"
+  }
+}
