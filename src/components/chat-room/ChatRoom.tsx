@@ -14,7 +14,7 @@ function getRandomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const ENDPOINT = "https://interactive-chatroom.herokuapp.com";
+const ENDPOINT = "localhost:5000"; //"https://interactive-chatroom.herokuapp.com";
 const socket: Socket<DefaultEventsMap, DefaultEventsMap> = io(ENDPOINT, {
   upgrade: false,
   transports: ["websocket"],
@@ -55,13 +55,9 @@ const ChatRoom: FC = (): ReactElement<HTMLDivElement> => {
         "join-room",
         { name, roomName, lastKnownPosition },
         (users?: User[], error?: string) => {
-          if (error) {
-            console.log(error);
-          }
+          if (error) console.log(error);
 
-          if (users) {
-            setUsers([...users]);
-          }
+          if (users) setUsers([...users]);
         }
       );
     }
