@@ -43,6 +43,8 @@ export class UsersHandler {
   }
 
   public updateUserPosition(idx: string, x: number, y: number) {
+    if (!x && !y) return;
+
     const userIndex = this.users.findIndex((user) => user.idx === idx);
 
     const usersCopy = [...this.users];
