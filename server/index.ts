@@ -3,7 +3,7 @@ import next, { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import http from "http";
 import { Server, Socket } from "socket.io";
 import {
-  changeUserPositionHandle,
+  changeUserPositionHandler,
   deleteUserHandler,
   joinRoomHandler,
   sendMessageHandler,
@@ -26,7 +26,7 @@ const nextHandler: NextApiHandler = nextApp.getRequestHandler();
       joinRoomHandler(socket);
       sendMessageHandler(socket, io);
       deleteUserHandler(socket);
-      changeUserPositionHandle(socket, io);
+      changeUserPositionHandler(socket, io);
     });
 
     app.all("*", (req: Request, res: Response) => {
