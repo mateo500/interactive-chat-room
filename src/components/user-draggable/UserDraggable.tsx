@@ -1,11 +1,16 @@
 import { FC, ReactElement, useEffect, useState, memo } from "react";
 import Draggable from "react-draggable";
 import {
+  DistanceConstrains,
+  RatioVisibilityDistance,
+} from "../../constants/ratioVisibilityDistance";
+import {
   cleanWhiteSpacesInString,
   getClosestVisibleElementsSortedByDistance,
   noop,
 } from "../../helpers/helpers";
 import { User } from "../chat-room/ChatRoom";
+import UserContent from "../user-content/UserContent";
 
 interface UserDraggableProps {
   users: User[];
@@ -23,10 +28,41 @@ const UserDraggable: FC<UserDraggableProps> = ({
 
     setActualName(urlParams.get("name").trim().toLowerCase());
 
-    //missing visibility css implementation
-    /* console.log(
-      getClosestVisibleElementsSortedByDistance(cleanWhiteSpacesInString(actualName))
-    ); */
+    getClosestVisibleElementsSortedByDistance(
+      cleanWhiteSpacesInString(actualName)
+    ).forEach((element) => {
+      const elementFound = document.getElementById(
+        `${element.elementId}-message`
+      );
+
+      if (element.distance > DistanceConstrains.NEAR) {
+        elementFound.setAttribute(
+          "style",
+          `opacity: ${RatioVisibilityDistance.NEAR}`
+        );
+      }
+
+      if (element.distance > DistanceConstrains.MEDIUM) {
+        elementFound.setAttribute(
+          "style",
+          `opacity: ${RatioVisibilityDistance.MEDIUM}`
+        );
+      }
+
+      if (element.distance > DistanceConstrains.FAR) {
+        elementFound.setAttribute(
+          "style",
+          `opacity: ${RatioVisibilityDistance.FAR}`
+        );
+      }
+
+      if (element.distance > DistanceConstrains.NO_VISIBLE) {
+        elementFound.setAttribute(
+          "style",
+          `opacity: ${RatioVisibilityDistance.NO_VISIBLE}`
+        );
+      }
+    });
   }, [users]);
 
   return (
@@ -49,7 +85,13 @@ const UserDraggable: FC<UserDraggableProps> = ({
             className="handle"
             id={`selector-dragabble-${cleanWhiteSpacesInString(user.name)}`}
           >
-            {user?.name}
+            <UserContent
+              messageElementId={`selector-dragabble-${cleanWhiteSpacesInString(
+                user.name
+              )}-message`}
+              message={user.message}
+              username={user.name}
+            />
           </div>
         </Draggable>
       ))}

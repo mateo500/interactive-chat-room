@@ -42,7 +42,12 @@ const ChatRoom: FC = (): ReactElement<HTMLDivElement> => {
 
       socket.emit(
         "join-room",
-        { name, roomName, lastKnownPosition, message: "test" },
+        {
+          name,
+          roomName,
+          lastKnownPosition,
+          message: "test hello hello hello hello world testing new message",
+        },
         (users?: User[], error?: string) => {
           if (error) console.log(error);
 

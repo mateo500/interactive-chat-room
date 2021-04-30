@@ -61,4 +61,14 @@ export class UsersHandler {
 
     this.users = usersCopy;
   }
+
+  public saveMessage(idx: string, message: string) {
+    const userIndex = this.users.findIndex((user) => user.idx === idx);
+
+    const usersCopy = [...this.users];
+
+    usersCopy[userIndex] = { ...usersCopy[userIndex], message };
+
+    this.users = usersCopy;
+  }
 }

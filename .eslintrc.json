@@ -33,6 +33,7 @@
     "import/no-unresolved": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "no-param-reassign": "warn",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "no-shadow": "off"
   }
 }

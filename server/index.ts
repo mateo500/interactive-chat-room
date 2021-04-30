@@ -2,12 +2,13 @@ import express, { Request, Response } from "express";
 import next, { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import http from "http";
 import { Server, Socket } from "socket.io";
-import {
-  changeUserPositionHandler,
-  deleteUserHandler,
-  joinRoomHandler,
-  sendMessageHandler,
-} from "./socket.handlers";
+import { UsersHandler } from "./users.handler";
+import { changeUserPositionHandler } from "./socket-handlers/changePosition.handler";
+import { deleteUserHandler } from "./socket-handlers/deleteUser.handler";
+import { joinRoomHandler } from "./socket-handlers/joinRoom.handler";
+import { sendMessageHandler } from "./socket-handlers/receiveMessage.handler";
+
+export const userHandler = new UsersHandler();
 
 const port: number = parseInt(process.env.PORT || "5000", 10);
 const dev: boolean = process.env.NODE_ENV !== "production";
