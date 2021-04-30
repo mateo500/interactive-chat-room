@@ -15,5 +15,5 @@ export const FormMessage = styled.form`
   padding: 20px;
   display: inline-block;
   border-radius: 8px;
-  width: 95%;
+  width: 97%;
 `;

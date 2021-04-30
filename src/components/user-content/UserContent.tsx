@@ -5,6 +5,7 @@ import {
   UserMessageBox,
   UsernameContainer,
   UserCircleContainer,
+  NoMessagePlaceholder,
 } from "./StyledUserContent";
 
 interface UserContentProps {
@@ -23,7 +24,13 @@ const UserContent: FC<UserContentProps> = ({
       <UserCircle />
       <UsernameContainer>{username}</UsernameContainer>
     </UserCircleContainer>
-    <UserMessageBox id={messageElementId}>{message}</UserMessageBox>
+    <UserMessageBox id={messageElementId}>
+      {message.length <= 0 ? (
+        <NoMessagePlaceholder>No messages yet...</NoMessagePlaceholder>
+      ) : (
+        message
+      )}
+    </UserMessageBox>
   </UserContentContainer>
 );
 

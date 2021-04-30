@@ -40,9 +40,11 @@ const ChatRoom: FC = (): ReactElement<HTMLDivElement> => {
 
     if (name && roomName) {
       const lastKnownPosition: { x: number; y: number } = {
-        x: getRandomInt(0, window.innerWidth),
-        y: getRandomInt(0, window.innerHeight),
+        x: getRandomInt(0, 1500),
+        y: getRandomInt(0, 700),
       };
+
+      //if the user enters as first time, we set a random position in the canvas, after that, we will keep of the movement state.
 
       socket.emit(
         "join-room",
@@ -50,7 +52,7 @@ const ChatRoom: FC = (): ReactElement<HTMLDivElement> => {
           name,
           roomName,
           lastKnownPosition,
-          message: "test hello hello hello hello world testing new message",
+          message: "",
         },
         (users?: User[], error?: string) => {
           if (error) console.log(error);

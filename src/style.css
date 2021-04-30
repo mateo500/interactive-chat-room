@@ -7,3 +7,8 @@ body {
 .handle {
   max-width: 250px;
 }
+
+.main__container {
+  display: flex;
+  justify-content: center;
+}
