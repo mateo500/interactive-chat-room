@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { FC, ReactElement } from "react";
 import {
   Form,
   FieldSet,
@@ -8,7 +9,7 @@ import {
   Button,
 } from "./StyledLoginForm";
 
-const LoginForm = () => {
+const LoginForm: FC = (): ReactElement<HTMLFormElement> => {
   const router = useRouter();
 
   return (

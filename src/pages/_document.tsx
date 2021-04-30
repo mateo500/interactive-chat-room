@@ -1,5 +1,6 @@
 /* eslint-disable dot-notation */
 import Document, { Head, Main, NextScript, Html } from "next/document";
+import { ReactElement } from "react";
 import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document {
@@ -15,7 +16,7 @@ export default class MyDocument extends Document {
     return { ...page, styleTags };
   }
 
-  render() {
+  render(): ReactElement {
     return (
       <Html>
         <Head>
@@ -30,6 +31,5 @@ export default class MyDocument extends Document {
     );
   }
 }
-
 
 //testing
