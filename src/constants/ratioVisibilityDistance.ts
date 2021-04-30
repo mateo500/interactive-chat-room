@@ -1,5 +1,5 @@
 export enum RatioVisibilityDistance {
-  NEAR = "0.9",
+  NEAR = "1",
   MEDIUM = "0.6",
   FAR = "0.3",
   NO_VISIBLE = "0",
@@ -11,5 +11,3 @@ export enum DistanceConstrains {
   FAR = 1000,
   NO_VISIBLE = 1300,
 }
-
-export const MAX_VISIBLE_DISTANCE = 1310;

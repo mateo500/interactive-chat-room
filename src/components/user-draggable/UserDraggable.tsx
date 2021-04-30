@@ -59,7 +59,7 @@ const UserDraggable: FC<UserDraggableProps> = ({
       if (element.distance > DistanceConstrains.NO_VISIBLE) {
         elementFound.setAttribute(
           "style",
-          `opacity: ${RatioVisibilityDistance.NO_VISIBLE}`
+          `opacity: ${RatioVisibilityDistance.NO_VISIBLE}; display: none;`
         );
       }
     });
@@ -85,13 +85,17 @@ const UserDraggable: FC<UserDraggableProps> = ({
             className="handle"
             id={`selector-dragabble-${cleanWhiteSpacesInString(user.name)}`}
           >
-            <UserContent
-              messageElementId={`selector-dragabble-${cleanWhiteSpacesInString(
-                user.name
-              )}-message`}
-              message={user.message}
-              username={user.name}
-            />
+            <div
+              style={{ cursor: actualName === user.name ? "pointer" : "auto" }}
+            >
+              <UserContent
+                messageElementId={`selector-dragabble-${cleanWhiteSpacesInString(
+                  user.name
+                )}-message`}
+                message={user.message}
+                username={user.name}
+              />
+            </div>
           </div>
         </Draggable>
       ))}

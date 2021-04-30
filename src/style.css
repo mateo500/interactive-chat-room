@@ -3,3 +3,7 @@ body {
     "Arial", sans-serif;
   background: #dbdbdb;
 }
+
+.handle {
+  max-width: 250px;
+}
