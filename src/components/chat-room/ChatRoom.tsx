@@ -1,9 +1,9 @@
 import { FC, ReactElement, useEffect, useState } from "react";
-import io, { Socket } from "socket.io-client";
-import { DefaultEventsMap } from "socket.io/dist/typed-events";
+import io from "socket.io-client";
 import { getRandomInt } from "../../helpers/helpers";
 import UserDraggable from "../user-draggable/UserDraggable";
 import envs from "../../env/environment";
+import MessageForm from "../message-form/MessageForm";
 
 export interface User {
   idx: string;
@@ -13,7 +13,7 @@ export interface User {
   message: string;
 }
 
-const socket: typeof Socket = io(envs.WS_HOST, {
+const socket = io(envs.WS_HOST, {
   upgrade: false,
   transports: ["websocket"],
 });
@@ -26,6 +26,10 @@ const ChatRoom: FC = (): ReactElement<HTMLDivElement> => {
     data: { lastX: number; lastY: number }
   ) => {
     socket.emit("change-user-position", { x: data.lastX, y: data.lastY });
+  };
+
+  const handleSendMessage = (message: string) => {
+    socket.emit("send-message", { message });
   };
 
   useEffect(() => {
@@ -65,9 +69,14 @@ const ChatRoom: FC = (): ReactElement<HTMLDivElement> => {
     };
   }, []);
 
-  return usersState ? (
-    <UserDraggable handleStop={handleStop} users={usersState} />
-  ) : null;
+  return (
+    <div>
+      {usersState ? (
+        <UserDraggable handleStop={handleStop} users={usersState} />
+      ) : null}
+      <MessageForm sendMessageHandler={handleSendMessage} />
+    </div>
+  );
 };
 
 export default ChatRoom;

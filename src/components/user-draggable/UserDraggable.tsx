@@ -66,7 +66,7 @@ const UserDraggable: FC<UserDraggableProps> = ({
   }, [users]);
 
   return (
-    <div>
+    <section>
       {users.map((user, index) => (
         <Draggable
           axis="both"
@@ -95,7 +95,7 @@ const UserDraggable: FC<UserDraggableProps> = ({
           </div>
         </Draggable>
       ))}
-    </div>
+    </section>
   );
 };
 
