@@ -28,6 +28,7 @@ export const Button = styled.button`
   border: 1px solid transparent;
   background: #59d459;
   color: white;
+  cursor: pointer;
 `;
 
 export const ButtonContainer = styled.div`
